@@ -30,6 +30,9 @@ Automated end-to-end tests for the [Nesto QA App](https://app.qa.nesto.ca/login)
 * TC02: Should show validation errors when submitting empty form
 * TC03: Should validate email format
 * TC04: Should successfully sign up a new user
+* TC05: Should throw validation error is password and confirm password don't match
+* TC06: Should throw errors if too many characters are added to First name and Last Name
+* TC07: Should throw errors if password doesn't meet policy
 
 ---
 
