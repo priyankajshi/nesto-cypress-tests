@@ -5,6 +5,10 @@ Automated end-to-end tests for the [Nesto QA App](https://app.qa.nesto.ca/login)
 ---
 
 ## Test cases
+
+### Locale usecases
+TC01: Should change language and locale as per locale selected
+
 ### Login usecases
 #### API test cases
 * TC01: Login with valid user

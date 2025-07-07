@@ -1,6 +1,6 @@
 export class ApplicationSelectionPage {
   visit() {
-    cy.visit('/application/selection');
+    cy.visit("/application/selection");
   }
 
   pageTitle = () => cy.get('span[data-test-id="empty_application_title"]');
@@ -9,6 +9,6 @@ export class ApplicationSelectionPage {
   refinance = () => cy.get('div[data-test-id="refinance"]');
 
   verifyPageTitle(expectedTitle: string) {
-    this.pageTitle().should('contain.text', expectedTitle);
+    this.pageTitle().should("contain.text", expectedTitle);
   }
 }

@@ -1,8 +1,13 @@
-import { User } from './type';
+import { User } from "./type";
 
 export function generateUniqueUser(template: User): User {
-  if (!template || !template.firstName || !template.lastName || !template.email) {
-    throw new Error('Invalid user template provided');
+  if (
+    !template ||
+    !template.firstName ||
+    !template.lastName ||
+    !template.email
+  ) {
+    throw new Error("Invalid user template provided");
   }
   const email = `ytz_${Math.random().toString(20).substring(2, 8)}@email.com`;
 
@@ -23,10 +28,10 @@ function generateRandomPhone(): string {
 }
 
 function generateStrongPassword(length: number = 15): string {
-  const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const lower = 'abcdefghijklmnopqrstuvwxyz';
-  const digits = '0123456789';
-  const symbols = '@';
+  const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const lower = "abcdefghijklmnopqrstuvwxyz";
+  const digits = "0123456789";
+  const symbols = "@";
 
   // Ensure at least one of each required character type
   const mustHave = [
@@ -38,11 +43,13 @@ function generateStrongPassword(length: number = 15): string {
   const allChars = upper + lower + digits + symbols;
   const remainingLength = length - mustHave.length;
   const remaining = Array.from({ length: remainingLength }, () =>
-    allChars.charAt(Math.floor(Math.random() * allChars.length))
+    allChars.charAt(Math.floor(Math.random() * allChars.length)),
   );
 
   // Shuffle the final password
-  const fullPassword = [...mustHave, ...remaining].sort(() => Math.random() - 0.5).join('');
+  const fullPassword = [...mustHave, ...remaining]
+    .sort(() => Math.random() - 0.5)
+    .join("");
 
   return fullPassword;
 }

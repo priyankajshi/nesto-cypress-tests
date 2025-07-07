@@ -1,8 +1,8 @@
-import { User } from '@support/type';
+import { User } from "@support/type";
 
 export class SignupPage {
   visit() {
-    cy.visit('/signup');
+    cy.visit("/signup");
   }
   firstName = () => cy.get('input[data-test-id="firstName"]');
   lastName = () => cy.get('input[data-test-id="lastName"]');
@@ -10,15 +10,18 @@ export class SignupPage {
   phone = () => cy.get('input[data-test-id="phone"]');
   password = () => cy.get('input[data-test-id="password"]');
   confirmPassword = () => cy.get('input[data-test-id="passwordConfirm"]');
-  consentCheckbox = () => cy.get('input[data-test-id="leadDistributeConsentAgreement"]');
+  consentCheckbox = () =>
+    cy.get('input[data-test-id="leadDistributeConsentAgreement"]');
   submitBtn = () => cy.get('button[data-test-id="createYourAccount"]');
-  formErrorFirstName = () => cy.get('[data-test-id=form-error-firstName]');
+  formErrorFirstName = () => cy.get("[data-test-id=form-error-firstName]");
   formErrorlastName = () => cy.get('[data-test-id="form-error-lastName"]');
   formErrorEmail = () => cy.get('[data-test-id="form-error-email"]');
-  errorMessageEmail = () => cy.get('[data-test-id="validation_errors_invalidEmail"]');
+  errorMessageEmail = () =>
+    cy.get('[data-test-id="validation_errors_invalidEmail"]');
   formErrorPhone = () => cy.get('[data-test-id="form-error-phone"]');
   formErrorPassword = () => cy.get('[data-test-id="form-error-password"]');
-  formErrorConfirmPassword = () => cy.get('[data-test-id="form-error-passwordConfirm"]');
+  formErrorConfirmPassword = () =>
+    cy.get('[data-test-id="form-error-passwordConfirm"]');
 
   fillForm(user: User) {
     if (
@@ -29,7 +32,7 @@ export class SignupPage {
       !user.phone ||
       !user.password
     ) {
-      throw new Error('Invalid user data provided');
+      throw new Error("Invalid user data provided");
     }
     this.firstName().clear().type(user.firstName);
     this.lastName().clear().type(user.lastName);
@@ -45,6 +48,6 @@ export class SignupPage {
   }
 
   getErrorMessage() {
-    return cy.get('.error-message');
+    return cy.get(".error-message");
   }
 }

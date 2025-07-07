@@ -1,4 +1,4 @@
-import { User } from './type';
+import { User } from "./type";
 
 declare global {
   namespace Cypress {

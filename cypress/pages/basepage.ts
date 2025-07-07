@@ -1,5 +1,3 @@
-import { get } from "node_modules/cypress/types/lodash/index.js";
-
 export class BasePage {
   visit(path: string) {
     cy.visit(Cypress.config("baseUrl") + path);
@@ -28,10 +26,10 @@ export class BasePage {
           // If the selected language and locale on page the same
           this.toggleLanguageSelector();
           return;
-        } else {    
-            // If the selected language and locale on page are different which means language is as expected
-            return;
-        }  
+        } else {
+          // If the selected language and locale on page are different which means language is as expected
+          return;
+        }
       });
   }
 }
