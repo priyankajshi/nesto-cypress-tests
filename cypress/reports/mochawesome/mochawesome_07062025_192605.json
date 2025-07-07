@@ -1,0 +1,170 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 3,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-07-06T23:25:27.886Z",
+    "end": "2025-07-06T23:26:05.086Z",
+    "duration": 37200,
+    "testsRegistered": 4,
+    "passPercent": 75,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2dbe872b-74ff-4c35-95fd-dc94039feea0",
+      "title": "",
+      "fullFile": "cypress/e2e/signup.spec.ts",
+      "file": "cypress/e2e/signup.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c5c47454-b591-42f2-a55d-ac5a01d893db",
+          "title": "Signup Flow UI Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC01: Should load the signup page",
+              "fullTitle": "Signup Flow UI Tests TC01: Should load the signup page",
+              "timedOut": null,
+              "duration": 770,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.url().should('include', '/signup');\ncy.title().should('include', 'nesto');\nsignupPage.firstName().should('exist');\nsignupPage.lastName().should('exist');\nsignupPage.email().should('exist');\nsignupPage.phone().should('exist');\nsignupPage.password().should('exist');\nsignupPage.confirmPassword().should('exist');\nsignupPage.submitBtn().should('exist');",
+              "err": {},
+              "uuid": "f9b41c68-b29c-4252-ac20-22933008981d",
+              "parentUUID": "c5c47454-b591-42f2-a55d-ac5a01d893db",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC02: Should show validation errors when submitting empty form",
+              "fullTitle": "Signup Flow UI Tests TC02: Should show validation errors when submitting empty form",
+              "timedOut": null,
+              "duration": 622,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "signupPage.submit();\nsignupPage.formErrorFirstName().should('contain', 'Required');\nsignupPage.formErrorlastName().should('contain', 'Required');\nsignupPage.formErrorEmail().should('contain', 'Required');\nsignupPage.formErrorPhone().should('contain', 'Required');\nsignupPage.formErrorPassword().should('contain', 'Required');\nsignupPage.formErrorConfirmPassword().should('contain', 'Required');",
+              "err": {},
+              "uuid": "0dd40e4c-9172-4297-8583-1374712e892a",
+              "parentUUID": "c5c47454-b591-42f2-a55d-ac5a01d893db",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC03: Should validate email format",
+              "fullTitle": "Signup Flow UI Tests TC03: Should validate email format",
+              "timedOut": null,
+              "duration": 1066,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "signupPage.email().type('bad-email');\nsignupPage.password().type('short');\nsignupPage.submit();\nsignupPage.errorMessageEmail().should('have.text', 'Invalid email address');",
+              "err": {},
+              "uuid": "85214458-fe3f-4229-8372-f299c8f65b97",
+              "parentUUID": "c5c47454-b591-42f2-a55d-ac5a01d893db",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC04: Should successfully sign up a new user",
+              "fullTitle": "Signup Flow UI Tests TC04: Should successfully sign up a new user",
+              "timedOut": null,
+              "duration": 11635,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('user-template').then((template) => {\n    const user = (0, utils_1.generateUniqueUser)(template);\n    expect(user, 'user test data is defined').to.not.be.undefined;\n    signupPage.fillForm(user);\n    signupPage.submit();\n    cy.intercept('POST', '/api/accounts').as('createAccount');\n    signupPage.submit();\n    cy.wait('@createAccount');\n    cy.url().should('include', '/application/selection');\n    applicationSelectionPage.mortgage().should('exist');\n    applicationSelectionPage.refinance().should('exist');\n    applicationSelectionPage.renewal().should('exist');\n    applicationSelectionPage.verifyPageTitle('nesto');\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 8000ms: expected 'https://app.qa.nesto.ca/signup' to include '/application/selection'",
+                "estack": "AssertionError: Timed out retrying after 8000ms: expected 'https://app.qa.nesto.ca/signup' to include '/application/selection'\n    at Context.eval (webpack:///./cypress/e2e/signup.spec.ts:58:15)\n    at getRet (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:120949:20)\n    at tryCatcher (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:4285:29)\n    at Context.thenFn (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:120960:66)\n    at Context.then (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:121211:21)\n    at wrapped (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:141532:19)",
+                "diff": null
+              },
+              "uuid": "d8cd93a2-1080-4e15-9662-8f7f418265e5",
+              "parentUUID": "c5c47454-b591-42f2-a55d-ac5a01d893db",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f9b41c68-b29c-4252-ac20-22933008981d",
+            "0dd40e4c-9172-4297-8583-1374712e892a",
+            "85214458-fe3f-4229-8372-f299c8f65b97"
+          ],
+          "failures": [
+            "d8cd93a2-1080-4e15-9662-8f7f418265e5"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 14093,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": true,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "quiet": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "inlineAssets": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

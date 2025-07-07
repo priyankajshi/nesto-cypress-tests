@@ -1,0 +1,250 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 8,
+    "passes": 6,
+    "pending": 0,
+    "failures": 2,
+    "start": "2025-07-06T23:14:13.153Z",
+    "end": "2025-07-06T23:15:21.980Z",
+    "duration": 68827,
+    "testsRegistered": 8,
+    "passPercent": 75,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "21743193-a7fd-4933-8f0b-694308aa818d",
+      "title": "",
+      "fullFile": "cypress/e2e/login.spec.ts",
+      "file": "cypress/e2e/login.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "747ca720-3b70-4fc7-8214-7606086d1dae",
+          "title": "Login Page UI Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC01: Loads the login page with all required fields",
+              "fullTitle": "Login Page UI Tests TC01: Loads the login page with all required fields",
+              "timedOut": null,
+              "duration": 1858,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.url().should('include', '/login');\nloginPage.email().should('be.visible');\nloginPage.password().should('be.visible');\nloginPage.submitBtn().should('be.visible');",
+              "err": {},
+              "uuid": "6ad7f28a-c0d6-4d03-8a9c-fddee54f1498",
+              "parentUUID": "747ca720-3b70-4fc7-8214-7606086d1dae",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC02: Shows validation errors when submitting empty form",
+              "fullTitle": "Login Page UI Tests TC02: Shows validation errors when submitting empty form",
+              "timedOut": null,
+              "duration": 597,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "loginPage.submitBtn().click();\nloginPage.formErrorEmail().should('contain', 'Required');\nloginPage.formErrorPassword().should('contain', 'Required');",
+              "err": {},
+              "uuid": "fcfc4e21-1413-4681-aee3-bb29641c36e1",
+              "parentUUID": "747ca720-3b70-4fc7-8214-7606086d1dae",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC03: Displays error on invalid credentials",
+              "fullTitle": "Login Page UI Tests TC03: Displays error on invalid credentials",
+              "timedOut": null,
+              "duration": 1574,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.intercept('POST', '/api/account/tokens').as('getToken');\nloginPage.email().clear().type('invalid@example.com');\nloginPage.password().clear().type('wrongpassword');\nloginPage.submitBtn().click();\ncy.wait('@getToken');\nloginPage.toastErrorTitle().should('be.visible');\nloginPage.verifyErrorMessage();",
+              "err": {},
+              "uuid": "05fec7d7-e246-44aa-be20-ccd28193bbbf",
+              "parentUUID": "747ca720-3b70-4fc7-8214-7606086d1dae",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC04: Logs in with signed up user",
+              "fullTitle": "Login Page UI Tests TC04: Logs in with signed up user",
+              "timedOut": null,
+              "duration": 10313,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('user-template').then((template) => {\n    const user = (0, utils_1.generateUniqueUser)(template);\n    cy.signupViaAPI(user).then((resp) => {\n        expect(resp.status).to.eq(201);\n    });\n    cy.intercept('POST', '/api/account/tokens').as('getToken');\n    loginPage.email().clear().type(user.email);\n    loginPage.password().clear().type(user.email);\n    loginPage.submitBtn().click();\n    cy.wait('@getToken');\n    cy.url().should('not.include', '/login');\n    appSelectionPage.mortgage().should('be.visible');\n    appSelectionPage.renewal().should('be.visible');\n    appSelectionPage.refinance().should('be.visible');\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 8000ms: expected 'https://app.qa.nesto.ca/login' to not include '/login'",
+                "estack": "AssertionError: Timed out retrying after 8000ms: expected 'https://app.qa.nesto.ca/login' to not include '/login'\n    at Context.eval (webpack:///./cypress/e2e/login.spec.ts:54:15)\n    at getRet (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:120949:20)\n    at tryCatcher (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:4285:29)\n    at Context.thenFn (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:120960:66)\n    at Context.then (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:121211:21)\n    at wrapped (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:141532:19)",
+                "diff": null
+              },
+              "uuid": "56c52d6f-b4b0-4843-b35b-bb86c9d0c8cb",
+              "parentUUID": "747ca720-3b70-4fc7-8214-7606086d1dae",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC05: Logs in successfully with valid credentials",
+              "fullTitle": "Login Page UI Tests TC05: Logs in successfully with valid credentials",
+              "timedOut": null,
+              "duration": 1788,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const username = Cypress.env('username');\nconst password = Cypress.env('password');\nif (!username || !password) {\n    throw new Error('Missing Cypress environment variables: username or password');\n}\nloginPage.email().clear().type(username);\nloginPage.password().clear().type(password);\nloginPage.submitBtn().click();\ncy.url().should('not.include', '/login');\nappSelectionPage.mortgage().should('be.visible');\nappSelectionPage.renewal().should('be.visible');\nappSelectionPage.refinance().should('be.visible');",
+              "err": {},
+              "uuid": "56f63168-dafc-4bcc-907c-11a4b4630f74",
+              "parentUUID": "747ca720-3b70-4fc7-8214-7606086d1dae",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC06: Should not allow script injection in email field",
+              "fullTitle": "Login Page UI Tests TC06: Should not allow script injection in email field",
+              "timedOut": null,
+              "duration": 1430,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "loginPage.email().clear().type(maliciousScript);\nloginPage.password().clear().type('SomePassword123');\nloginPage.submitBtn().click();\nloginPage.formErrorEmail().should('contain', 'Invalid email address');",
+              "err": {},
+              "uuid": "d0b153e1-196e-44e6-afad-c3596da42f6f",
+              "parentUUID": "747ca720-3b70-4fc7-8214-7606086d1dae",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC07: Should not allow script injection in password field",
+              "fullTitle": "Login Page UI Tests TC07: Should not allow script injection in password field",
+              "timedOut": null,
+              "duration": 9777,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "loginPage.email().clear().type('abc@email.com');\nloginPage.password().clear().type(maliciousScript);\nloginPage.submitBtn().click();\nloginPage.formErrorPassword().should('contain', 'Invalid password'); // bug: password is taking script",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 8000ms: Expected to find element: `[data-test-id=form-error-password]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 8000ms: Expected to find element: `[data-test-id=form-error-password]`, but never found it.\n    at Context.eval (webpack:///./cypress/e2e/login.spec.ts:88:34)",
+                "diff": null
+              },
+              "uuid": "05ca4da8-c12b-4a65-9400-b220c8524448",
+              "parentUUID": "747ca720-3b70-4fc7-8214-7606086d1dae",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC08: Should navigate to forgot password page",
+              "fullTitle": "Login Page UI Tests TC08: Should navigate to forgot password page",
+              "timedOut": null,
+              "duration": 1109,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "loginPage.forgotPassword();\ncy.url().should('include', '/forgot');\nforgotPasswordPage.emailInput().should('be.visible');\nforgotPasswordPage.returnBtn().should('be.visible');\nforgotPasswordPage.sendBtn().should('be.visible');\nforgotPasswordPage.forgotPasswordConfirmation().should('not.exist');\nforgotPasswordPage.enterEmail('abc@example.com');\nforgotPasswordPage.sendResetLink();\nforgotPasswordPage.verifyConfirmationMessage();\nforgotPasswordPage.returnToLogin();\ncy.url().should('include', '/login');",
+              "err": {},
+              "uuid": "15bda9e3-a384-4cda-a1aa-0b1f49a2da04",
+              "parentUUID": "747ca720-3b70-4fc7-8214-7606086d1dae",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6ad7f28a-c0d6-4d03-8a9c-fddee54f1498",
+            "fcfc4e21-1413-4681-aee3-bb29641c36e1",
+            "05fec7d7-e246-44aa-be20-ccd28193bbbf",
+            "56f63168-dafc-4bcc-907c-11a4b4630f74",
+            "d0b153e1-196e-44e6-afad-c3596da42f6f",
+            "15bda9e3-a384-4cda-a1aa-0b1f49a2da04"
+          ],
+          "failures": [
+            "56c52d6f-b4b0-4843-b35b-bb86c9d0c8cb",
+            "05ca4da8-c12b-4a65-9400-b220c8524448"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 28446,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": true,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "quiet": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "inlineAssets": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

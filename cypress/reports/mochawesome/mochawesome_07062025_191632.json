@@ -1,0 +1,127 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-07-06T23:16:31.898Z",
+    "end": "2025-07-06T23:16:32.221Z",
+    "duration": 323,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "bbdce2c7-355c-4af7-9ac5-8e4bde90c4c8",
+      "title": "",
+      "fullFile": "cypress/api/api.login.spec.ts",
+      "file": "cypress/api/api.login.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a24f56ff-93f7-4330-aa2d-9943ae49ad1b",
+          "title": "Login API Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC01: Login with valid user",
+              "fullTitle": "Login API Tests TC01: Login with valid user",
+              "timedOut": null,
+              "duration": 257,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const username = Cypress.env('username');\nconst password = Cypress.env('password');\nif (!username || !password) {\n    throw new Error('Missing Cypress environment variables: username or password');\n}\ncy.loginViaAPI(username, password).then((resp) => {\n    expect(resp.status).to.eq(201);\n    expect(resp.body.account).to.have.property('email').and.contain(username);\n    expect(resp.body.account).to.have.property('id');\n});",
+              "err": {},
+              "uuid": "06a0b255-faa4-4217-b91b-2dc47ff49bda",
+              "parentUUID": "a24f56ff-93f7-4330-aa2d-9943ae49ad1b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC02: Fails when logging in with invalid users",
+              "fullTitle": "Login API Tests TC02: Fails when logging in with invalid users",
+              "timedOut": null,
+              "duration": 48,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('login-credentials').then((users) => {\n    cy.loginViaAPI(users.invalidUser.email, users.invalidUser.password).then((resp) => {\n        expect(resp.status).to.eq(400);\n        expect(resp.body.error).to.include('invalid credentials');\n    });\n});",
+              "err": {},
+              "uuid": "1fe03c31-f758-481b-9c60-ef1d9a4ace0f",
+              "parentUUID": "a24f56ff-93f7-4330-aa2d-9943ae49ad1b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "06a0b255-faa4-4217-b91b-2dc47ff49bda",
+            "1fe03c31-f758-481b-9c60-ef1d9a4ace0f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 305,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": true,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "quiet": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "inlineAssets": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

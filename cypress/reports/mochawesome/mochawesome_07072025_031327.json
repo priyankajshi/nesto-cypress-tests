@@ -1,0 +1,132 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 1,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-07-07T03:13:27.037Z",
+    "end": "2025-07-07T03:13:27.508Z",
+    "duration": 471,
+    "testsRegistered": 2,
+    "passPercent": 50,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "784d255c-86f8-468b-b196-48fa821a76e9",
+      "title": "",
+      "fullFile": "cypress/api/api.login.spec.ts",
+      "file": "cypress/api/api.login.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0d162ac3-d65c-41ca-b8fa-9dec257a3622",
+          "title": "Login API Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC01: Login with valid user",
+              "fullTitle": "Login API Tests TC01: Login with valid user",
+              "timedOut": null,
+              "duration": 81,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const username = Cypress.env('username');\nconst password = Cypress.env('password');\nif (!username || !password) {\n    throw new Error('Missing Cypress environment variables: username or password');\n}\ncy.loginViaAPI(username, password).then((resp) => {\n    expect(resp.status).to.eq(201);\n    expect(resp.body.account).to.have.property('email').and.contain(username);\n    expect(resp.body.account).to.have.property('id');\n});",
+              "err": {
+                "message": "Error: Missing Cypress environment variables: username or password",
+                "estack": "Error: Missing Cypress environment variables: username or password\n    at Context.eval (webpack:///./cypress/api/api.login.spec.ts:6:12)\n    at runnable.fn (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:141799:19)\n    at callFn (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:160877:21)\n    at Runnable.run (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:160864:7)\n    at <unknown> (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:166954:30)\n    at PassThroughHandlerContext.finallyHandler (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:4042:23)\n    at PassThroughHandlerContext.tryCatcher (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://app.qa.nesto.ca/__cypress/runner/cypress_runner.js:1546:18)",
+                "diff": null
+              },
+              "uuid": "d301eeb2-473a-41f0-bf1d-de1da2745f26",
+              "parentUUID": "0d162ac3-d65c-41ca-b8fa-9dec257a3622",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC02: Fails when logging in with invalid users",
+              "fullTitle": "Login API Tests TC02: Fails when logging in with invalid users",
+              "timedOut": null,
+              "duration": 121,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('login-credentials').then((users) => {\n    cy.loginViaAPI(users.invalidUser.email, users.invalidUser.password).then((resp) => {\n        expect(resp.status).to.eq(400);\n        expect(resp.body.error).to.include('invalid credentials');\n    });\n});",
+              "err": {},
+              "uuid": "d1961251-4d57-4c4a-898a-a4c4c5b6cfd9",
+              "parentUUID": "0d162ac3-d65c-41ca-b8fa-9dec257a3622",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d1961251-4d57-4c4a-898a-a4c4c5b6cfd9"
+          ],
+          "failures": [
+            "d301eeb2-473a-41f0-bf1d-de1da2745f26"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 202,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": true,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "quiet": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "inlineAssets": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

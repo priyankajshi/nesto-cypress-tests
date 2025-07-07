@@ -1,0 +1,127 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-07-07T03:14:33.187Z",
+    "end": "2025-07-07T03:14:33.420Z",
+    "duration": 233,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2fed928a-3f07-419e-a00e-c2057838242a",
+      "title": "",
+      "fullFile": "cypress/api/api.signup.spec.ts",
+      "file": "cypress/api/api.signup.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4e725042-f1ba-4579-a057-edcb27c26ecd",
+          "title": "User Signup API Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC01: Signs up a unique user",
+              "fullTitle": "User Signup API Tests TC01: Signs up a unique user",
+              "timedOut": null,
+              "duration": 154,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "expect(user, 'user test data is defined').to.not.be.undefined;\ncy.signupViaAPI(user).then((resp) => {\n    expect(resp.status).to.eq(201);\n    expect(resp.body.account).to.have.property('email').and.contain(user.email);\n    expect(resp.body.account).to.have.property('firstName').and.contain(user.firstName);\n    expect(resp.body.account).to.have.property('lastName').and.contain(user.lastName);\n    expect(resp.body.account).to.have.property('id');\n});",
+              "err": {},
+              "uuid": "05bdc3fe-222e-4780-b09c-b952d8221ec8",
+              "parentUUID": "4e725042-f1ba-4579-a057-edcb27c26ecd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC02: Sign up fails when signing up same user again",
+              "fullTitle": "User Signup API Tests TC02: Sign up fails when signing up same user again",
+              "timedOut": null,
+              "duration": 54,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "expect(user, 'user test data is defined').to.not.be.undefined;\ncy.signupViaAPI(user).then((resp) => {\n    expect(resp.status).to.eq(409);\n    expect(resp.body.error).to.include('duplicate entity');\n});",
+              "err": {},
+              "uuid": "85add7c5-6a7a-41ac-a768-006d91771cae",
+              "parentUUID": "4e725042-f1ba-4579-a057-edcb27c26ecd",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "05bdc3fe-222e-4780-b09c-b952d8221ec8",
+            "85add7c5-6a7a-41ac-a768-006d91771cae"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 208,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": true,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "quiet": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "inlineAssets": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
