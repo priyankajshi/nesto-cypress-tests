@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["ESNext", "DOM"],
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "module": "Node16",   
+    "moduleResolution": "node16",
+    "baseUrl": "./",
+    "paths": {
+      "@pages/*": ["cypress/pages/*"],
+      "@support/*": ["cypress/support/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", 
+              "cypress/**/*.ts",
+              "cypress/support/command.d.ts"
+            ],
+  "exclude": ["node_modules", "dist"]
+}
