@@ -25,8 +25,10 @@ describe("Login Page UI Tests", () => {
 
   it("TC02: Shows validation errors when submitting empty form", () => {
     loginPage.submitBtn().click();
-    loginPage.formErrorEmail().should("contain", "Required");
-    loginPage.formErrorPassword().should("contain", "Required");
+    cy.fixture("error-messages").then((messages) => {
+      loginPage.formErrorEmail().should("contain", messages.requiredField);
+      loginPage.formErrorPassword().should("contain", messages.requiredField);
+    });
   });
 
   it("TC03: Displays error on invalid credentials", () => {
@@ -88,7 +90,9 @@ describe("Login Page UI Tests", () => {
     loginPage.email().clear().type(maliciousScript);
     loginPage.password().clear().type("SomePassword123");
     loginPage.submitBtn().click();
-    loginPage.formErrorEmail().should("contain", "Invalid email address");
+    cy.fixture("error-messages").then((messages) => {
+      loginPage.formErrorEmail().should("contain", messages.invalidEmail);
+    });
   });
 
   it("TC07: Should not allow script injection in password field", () => {

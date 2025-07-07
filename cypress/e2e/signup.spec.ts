@@ -26,12 +26,16 @@ describe("Signup Flow UI Tests", () => {
   it("TC02: Should show validation errors when submitting empty form", () => {
     signupPage.submit();
 
-    signupPage.formErrorFirstName().should("contain", "Required");
-    signupPage.formErrorlastName().should("contain", "Required");
-    signupPage.formErrorEmail().should("contain", "Required");
-    signupPage.formErrorPhone().should("contain", "Required");
-    signupPage.formErrorPassword().should("contain", "Required");
-    signupPage.formErrorConfirmPassword().should("contain", "Required");
+    cy.fixture("error-messages").then((messages) => {
+      signupPage.formErrorFirstName().should("contain", messages.requiredField);
+      signupPage.formErrorlastName().should("contain", messages.requiredField);
+      signupPage.formErrorEmail().should("contain", messages.requiredField);
+      signupPage.formErrorPhone().should("contain", messages.requiredField);
+      signupPage.formErrorPassword().should("contain", messages.requiredField);
+      signupPage
+        .formErrorConfirmPassword()
+        .should("contain", messages.requiredField);
+    });
   });
 
   it("TC03: Should validate email format", () => {
