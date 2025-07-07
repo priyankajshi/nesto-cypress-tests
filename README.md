@@ -90,7 +90,7 @@ npm install cypress --save-dev
 
 #### Install dependencies
 ```bash
-npm install
+npm ci
 ```
 
 ### Run Tests
@@ -107,6 +107,10 @@ npx cypress run
 #### Format code
 ```bash
 npx prettier --write "cypress/**/*.{ts,js}"
+```
+#### Check style
+```bash
+npm run lint
 ```
 
 ### Test Result Reporting
