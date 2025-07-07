@@ -96,12 +96,12 @@ npm ci
 ### Run Tests
 Headed (interactive):
 ```bash
-npx cypress open
+CYPRESS_username=test@yopmail.com CYPRESS_password=TestUser@1234 npx cypress open
 ```
 
 Headless (CI-friendly):
 ```bash
-npx cypress run
+CYPRESS_username=test@yopmail.com CYPRESS_password=TestUser@1234 npx cypress run
 ```
 
 #### Format code
